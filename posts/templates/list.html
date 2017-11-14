@@ -4,13 +4,49 @@
 	<title>Document</title>
 </head>
 <body>
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+
+	<a href="{% url 'create'%}"><button>Create</button></a>
 
 	{% for item in post_items %}
 	<ul>
-		<li>{{item.title}}</li>
+		<a href="{% url 'detail' post_id=item.id %}"><li>{{item.title}}</li></a>
 		<li>{{item.content}}</li>
-		<li>{{item.timestamp}}</li>
+		<li>{{item.id}}</li>
+		<li>{{timestamp}}</li>
+		<li> {% if item.img %}
+			<img src="{{item.img.url}}">
+			{% endif %}
+		</li>
+
+
 	</ul>>
 	{%endfor%}
+
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if post_items.has_previous %}
+	            <a href="?page={{ post_items.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ post_items.number }} of {{ post_items.paginator.num_pages }}.
+	        </span>
+
+	        {% if post_items.has_next %}
+	            <a href="?page={{ post_items.next_page_number }}">next</a>
+	        {% endif %}
+	    </span>
+	</div>
+
 </body>
 </html>
+ 
+
+

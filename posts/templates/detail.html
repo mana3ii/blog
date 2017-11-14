@@ -9,6 +9,9 @@
 		<li>{{item.title}}</li>
 		<li>{{item.content}}</li>
 		<li>{{item.timestamp}}</li>
+		{% if item.img %}
+			<img src="{{item.img.url}}">
+			{% endif %}
 	</ul>
 </body>
 </html>
