@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
 
+{% block heading %}
+{% endblock  %}
+
+{% block content %}
+	
 	<ul>
 		<li>{{item.title}}</li>
 		<li>{{item.content}}</li>
@@ -13,5 +13,5 @@
 			<img src="{{item.img.url}}">
 			{% endif %}
 	</ul>
-</body>
-</html>
+
+{% endblock content %}

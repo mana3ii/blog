@@ -1,33 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Document</title>
-</head>
-<body>
+{%extends "base.html"%}
+
+{% block content %}
+
 	{% if messages %}
 	<ul class="messages">
 	    {% for message in messages %}
 	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
 	    {% endfor %}
+	    	
+<div>
 	</ul>
 	{% endif %}
 
-	<a href="{% url 'create'%}"><button>Create</button></a>
 
+	
+
+    <div class="jumbotron">
+  <h1 class="display-3">Welcome All</h1>
+  <p>Loook where it will endup.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'create'%}" role="button">create</a>
+  </p>
+</div>
+
+<div class="row">
 	{% for item in post_items %}
-	<ul>
-		<a href="{% url 'detail' post_id=item.id %}"><li>{{item.title}}</li></a>
-		<li>{{item.content}}</li>
-		<li>{{item.id}}</li>
-		<li>{{timestamp}}</li>
-		<li> {% if item.img %}
-			<img src="{{item.img.url}}">
-			{% endif %}
-		</li>
+    <div class="col-sm-12 col-md-4 col-lg-3 d-flex justify-content-around">
+        <div class="card" style="width: 20rem;">
+            {% if item.img %}
+                <img class="card-img-top" src="{{item.img.url}}" alt="Card image cap">
+            {% endif %}
+          <div class="card-body">
+            <h4 class="card-title">{{item.title}}</h4>
+            <p class="card-text">{{item.content}}</p>
+            <p class="card-text">{{item.id}}</p>
+            <p class="card-text">{{item.author}}</p>  
+            <a href="{% url 'update' post_slug=item.slug%}" class="btn btn-primary">update</a>
+            <a href="{% url 'delete' post_slug=item.slug%}" class="btn btn-primary">delete</a>
 
-
-	</ul>>
+          </div>
+        </div>
+    </div>
 	{%endfor%}
+</div>
+
 
 	<div class="pagination">
 	    <span class="step-links">
@@ -45,8 +61,7 @@
 	    </span>
 	</div>
 
-</body>
-</html>
- 
+{% endblock content %}
+
 
 
