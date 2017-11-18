@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User 
+from django.utils import timezone 
 
 
 
@@ -10,10 +11,11 @@ class Post(models.Model):
     title = models.CharField(max_length=120)
     author = models.ForeignKey(User, default=1)
     content = models.TextField()
-    timestamp = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now=False,auto_now_add=False)
     img = models.ImageField(null=True, blank=True, upload_to="post_images")
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     publish_date = models.DateField()
     draft = models.BooleanField(default=False)
     def __str__(self):

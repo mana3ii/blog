@@ -1,18 +1,6 @@
 {%extends "base.html"%}
 
 {% block content %}
-
-	{% if messages %}
-	<ul class="messages">
-	    {% for message in messages %}
-	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-	    {% endfor %}
-	    	
-<div>
-	</ul>
-	{% endif %}
-
-
 	
 
     <div class="jumbotron">
@@ -23,9 +11,17 @@
   </p>
 </div>
 
+<form action="{% url 'list' %}" method="GET">
+    <input type="text" name='hessa' placeholder="Search posts"value="{{request.GET.g}}">
+    <input type="submit" value="Search">
+
+</form>
+
+<br>
 <div class="row">
 	{% for item in post_items %}
-    <div class="col-sm-12 col-md-4 col-lg-3 d-flex justify-content-around">
+    {# from bootstrab #}
+    <div class="col-sm-12 col-md-6 d-flex justify-content-around">
         <div class="card" style="width: 20rem;">
             {% if item.img %}
                 <img class="card-img-top" src="{{item.img.url}}" alt="Card image cap">
@@ -33,10 +29,10 @@
           <div class="card-body">
             <h4 class="card-title">{{item.title}}</h4>
             <p class="card-text">{{item.content}}</p>
-            <p class="card-text">{{item.id}}</p>
             <p class="card-text">{{item.author}}</p>  
             <a href="{% url 'update' post_slug=item.slug%}" class="btn btn-primary">update</a>
             <a href="{% url 'delete' post_slug=item.slug%}" class="btn btn-primary">delete</a>
+            <a href="{% url 'detail' post_slug=item.slug%}" class="btn btn-primary">detail</a>
 
           </div>
         </div>
@@ -48,7 +44,7 @@
 	<div class="pagination">
 	    <span class="step-links">
 	        {% if post_items.has_previous %}
-	            <a href="?page={{ post_items.previous_page_number }}">previous</a>
+	            <a href="?page={{ post_items.previous_page_number }}&hessa={{ request.GET.hessa }}">previous</a>
 	        {% endif %}
 
 	        <span class="current">
@@ -56,7 +52,7 @@
 	        </span>
 
 	        {% if post_items.has_next %}
-	            <a href="?page={{ post_items.next_page_number }}">next</a>
+	            <a href="?page={{ post_items.next_page_number }}"&hessa={{ request.GET.hessa }}>next</a>
 	        {% endif %}
 	    </span>
 	</div>

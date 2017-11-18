@@ -4,13 +4,37 @@
 {% endblock  %}
 
 {% block content %}
-	
+   <div class="jumbotron">
+  <h1 class="display-3">Welcome All</h1>
+  <p>Loook where it will endup.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'create'%}" role="button">create</a>
+  </p>
+</div>
 	<ul>
-		<li>{{item.title}}</li>
-		<li>{{item.content}}</li>
-		<li>{{item.timestamp}}</li>
 		{% if item.img %}
 			<img src="{{item.img.url}}">
+		<div class="card-body">
+            <h4 class="card-title">{{item.title}}</h4>
+            <p class="card-text">{{item.content}}</p>
+            <p class="card-text">{{item.author}}</p> 
+            <p class="card-text">{{item.updated}}</p> 
+            <p class="card-text">{{item.updated}}</p> 
+{#        		<p Author: {{.author.get_full_name}}</p> 
+ #}
+
+        </div>
+		
+			<a href="{% url 'update' post_slug=item.slug%}" class="btn btn-primary">update</a>
+            <a href="{% url 'delete' post_slug=item.slug%}" class="btn btn-primary">delete</a>
+            
+
+
+
+            <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}"class="btn btn-dark">Share on Facebook</a>
+        
+        </a>
+
 			{% endif %}
 	</ul>
 
