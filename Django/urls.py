@@ -20,6 +20,7 @@ from Django import settings
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include('posts.urls')),
+    url(r'^comments/', include('django_comments.urls')),
     
 ]
 # 3ashan ata3araf el el two files (Media & Static)
