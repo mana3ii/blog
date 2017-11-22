@@ -23,7 +23,7 @@ class Post(models.Model):
 
 # to creat a model method ... funcction for an object it gives me the urls for detail using reverse it take details
     def get_detail_url(self):
-        return reverse("detail", kwargs={"post_id":self.id})
+        return reverse("detail", kwargs={"post_slug":self.slug})
     class Meta:
         ordering=['title']
 
@@ -47,3 +47,10 @@ def pre_save_post_funtion(*args, **kwargs):
         instance.slug = create_slug(instance)
 
 pre_save.connect(pre_save_post_funtion, sender=Post)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User)
+    post = models.ForeignKey(Post)
+    timestamp =models.DateTimeField(auto_now_add=True)
+    
