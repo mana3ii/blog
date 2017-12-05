@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=120)
     author = models.ForeignKey(User, default=1)
     content = models.TextField()
-    timestamp = models.DateTimeField(auto_now=False,auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False,auto_now_add=True)
     img = models.ImageField(null=True, blank=True, upload_to="post_images")
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now_add=True)

@@ -12,5 +12,7 @@
 		{%csrf_token%}
 		{{form|crispy}}
 		<input class="btn btn-success" value="Sign Up its Free !" type="submit">
+		<a href="{% url 'github_login' %}" class="btn btn-dark"><i class="fa fa-github" aria-hidden="true"></i> signup with Github</a>
+
 	</form>
 {% endblock content %}

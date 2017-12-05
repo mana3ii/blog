@@ -21,7 +21,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include('posts.urls')),
     url(r'^comments/', include('django_comments.urls')),
-    
+    url(r'^googly/',include('googly.urls',namespace='googly')),
+    url(r'^twitty/',include('twitty.urls',namespace='twitty')),
+    url(r'^gitty/',include('gitty.urls',namespace='gitty')),
+    url(r'^api/',include('api.urls',namespace='api')),
+    url(r'^accounts/',include('allauth.urls')),
+
 ]
 # 3ashan ata3araf el el two files (Media & Static)
 if settings.DEBUG:
