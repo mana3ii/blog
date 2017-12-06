@@ -20,7 +20,7 @@
         <a class="nav-link" href="{% url 'log_out' %}">logout</a>
       </li>      
       <li class="nav-item">
-        <a class="nav-link disabled">{{request.user}}</a>
+        <a class="nav-link disabled" href="{{request.user}}">{{request.user}}}</a>
       </li>
       {% else %}
       <li class="nav-item">
