@@ -46,8 +46,8 @@ def userlogin(request):
     if request.method == "POST":
         form = UserLogin(request.POST)
     if form.is_valid():
-        some_username = form.cleaned_date['username']
-        some_password = form.cleaned_date['password']
+        some_username = form.cleaned_data['username']
+        some_password = form.cleaned_data['password']
         auth = authenticate(username=some_username, password=some_password)
         if auth is not None:
             login(request, auth)
