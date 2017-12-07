@@ -45,17 +45,17 @@ def userlogin(request):
     context['form'] = form
     if request.method == "POST":
         form = UserLogin(request.POST)
-    if form.is_valid():
-        some_username = form.cleaned_data['username']
-        some_password = form.cleaned_data['password']
-        auth = authenticate(username=some_username, password=some_password)
-        if auth is not None:
-            login(request, auth)
-            return redirect("list")
+        if form.is_valid():
+            some_username = form.cleaned_data['username']
+            some_password = form.cleaned_data['password']
+            auth = authenticate(username=some_username, password=some_password)
+            if auth is not None:
+                login(request, auth)
+                return redirect("list")
             messages.warning(request, 'incorrect username/password combination')
             return redirect ("log_in")
-            messages.warning(request, form.errors)
-            return redirect("log_in")
+        messages.warning(request, form.errors)
+        return redirect("log_in")
     return render(request, 'log_in.html', context)
 
 def userlogout(request):
@@ -141,7 +141,7 @@ def post_create (request):
 
 def post_update (request, post_slug):
     if not request.user.is_staff:
-        raise http404
+        raise Http404
 
     item = Post.objects.get(slug=post_slug)
     form =PostForm(request.POST or None,request.FILES or None, instance=item)
